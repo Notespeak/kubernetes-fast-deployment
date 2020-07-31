@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Hey BOSS I HAZZ A KANZER!"
+echo "Initializing"
 apt-get update && apt-get install -y \
   apt-transport-https ca-certificates curl software-properties-common gnupg2 
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
@@ -30,6 +30,7 @@ mkdir -p /etc/systemd/system/docker.service.d
 systemctl daemon-reload
 systemctl restart docker
 sudo systemctl enable docker
+echo -e "\e[32m-----------------Injecting modprobe-netfilter for Docker---------------]"
 sudo modprobe br_netfilter
 sudo apt-get update && sudo apt-get install -y apt-transport-https curl
 
@@ -43,3 +44,5 @@ sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 systemctl daemon-reload
 systemctl restart kubelet
+echo -e "\e[32m-----------Final service restart successful---------------------]"
+
